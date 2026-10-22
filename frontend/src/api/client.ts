@@ -1,18 +1,35 @@
-const API_BASE = (import.meta.env.VITE_API_BASE_URL || "http://localhost:8000/api").replace(/\/$/, "");
+function getApiBase(): string {
+  let url = (import.meta.env.VITE_API_BASE_URL || "http://localhost:8000/api").trim().replace(/\/+$/, "");
+  if (!url.endsWith("/api")) {
+    url = `${url}/api`;
+  }
+  return url;
+}
+
+const API_BASE = getApiBase();
 
 export async function fetchJson<T>(url: string, options?: RequestInit): Promise<T> {
-  const res = await fetch(`${API_BASE}${url}`, {
-    headers: {
-      "Content-Type": "application/json",
-      ...(options?.headers || {})
-    },
-    ...options
-  });
-  if (!res.ok) {
-    const errorBody = await res.text();
-    throw new Error(`API error (${res.status}): ${errorBody}`);
+  try {
+    const res = await fetch(`${API_BASE}${url}`, {
+      headers: {
+        "Content-Type": "application/json",
+        ...(options?.headers || {})
+      },
+      ...options
+    });
+    if (!res.ok) {
+      const errorBody = await res.text();
+      throw new Error(`API error (${res.status}): ${errorBody || res.statusText}`);
+    }
+    return res.json();
+  } catch (err: any) {
+    if (err.message && err.message.startsWith("API error")) {
+      throw err;
+    }
+    throw new Error(
+      `Cannot connect to backend (${API_BASE}). If Render backend is spinning up from cold sleep, please wait 30 seconds and refresh. Error: ${err.message}`
+    );
   }
-  return res.json();
 }
 
 export const api = {

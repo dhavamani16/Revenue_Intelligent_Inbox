@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from pathlib import Path
 import json
@@ -32,6 +32,16 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Middleware: Automatically route requests without '/api' prefix to '/api'
+@app.middleware("http")
+async def api_prefix_fallback(request: Request, call_next):
+    path = request.url.path
+    # If the request does not start with /api, /docs, /openapi.json, or /redoc, redirect scope internally to /api
+    if not (path.startswith("/api") or path.startswith("/docs") or path.startswith("/openapi.json") or path.startswith("/redoc") or path == "/"):
+        request.scope["path"] = f"/api{path}"
+    response = await call_next(request)
+    return response
+
 # Include Routers
 app.include_router(dashboard.router)
 app.include_router(conversations.router)
@@ -60,6 +70,8 @@ def startup_event():
             with open(f2_path, "r", encoding="utf-8") as f:
                 process_envelope(json.load(f), filename="02_update.json")
 
+@app.get("/")
+@app.get("/health")
 @app.get("/api/health")
 def health_check():
     with get_db() as conn:
