@@ -1,0 +1,36 @@
+# Node / Frontend
+node_modules/
+frontend/node_modules/
+frontend/dist/
+frontend/.tmp/
+*.log
+
+# Python / Backend
+__pycache__/
+*/__pycache__/
+*/*/__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+*/.pytest_cache/
+venv/
+env/
+.venv/
+
+# Local databases and exports
+*.db-journal
+*.db-wal
+*.db-shm
+backend/data/exports/
+backend/data/revenue_intelligence.db
+
+# Environment variables
+.env
+.env.local
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
