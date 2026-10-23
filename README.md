@@ -4,6 +4,20 @@ A complete, functional, deployment-ready web application built for sales manager
 
 ---
 
+## 🚀 Live Deployment & Demo Links
+
+| Resource | Status | Live URL |
+| :--- | :---: | :--- |
+| **Live Frontend Dashboard (Vercel)** | 🟢 Active | **[https://revenue-intelligent-inbox-cgu5.vercel.app](https://revenue-intelligent-inbox-cgu5.vercel.app)** |
+| **Live REST API (Render)** | 🟢 Active | **[https://revenue-intelligent-inbox.onrender.com](https://revenue-intelligent-inbox.onrender.com)** |
+| **Interactive API Documentation** | 🟢 Active | **[https://revenue-intelligent-inbox.onrender.com/docs](https://revenue-intelligent-inbox.onrender.com/docs)** |
+| **System Health Check** | 🟢 Active | **[https://revenue-intelligent-inbox.onrender.com/api/health](https://revenue-intelligent-inbox.onrender.com/api/health)** |
+| **GitHub Source Repository** | 🟢 Active | **[github.com/dhavamani16/Revenue_Intelligent_Inbox](https://github.com/dhavamani16/Revenue_Intelligent_Inbox)** |
+| **Editable Presentation Slides** | 📄 Attached | [`revenue_intelligence_findings.pptx`](https://github.com/dhavamani16/Revenue_Intelligent_Inbox/blob/main/revenue_intelligence_findings.pptx) *(5 dark SaaS slides)* |
+| **3-Minute Video Walkthrough Script** | 🎬 Attached | [`demo_script.md`](https://github.com/dhavamani16/Revenue_Intelligent_Inbox/blob/main/demo_script.md) *(with timestamps & narration cues)* |
+
+---
+
 ## 1. UI Design & Screenshots Fidelity
 
 The application strictly implements the visual language from the provided design references:
@@ -41,7 +55,7 @@ Revenue_Intelligent_Inbox/
 │       └── generate_slides.py     # python-pptx script generating 5 editable slides
 ├── frontend/
 │   ├── src/
-│   │   ├── api/client.ts          # Typed REST API client
+│   │   ├── api/client.ts          # Typed REST API client with URL auto-normalization
 │   │   ├── types/index.ts         # TypeScript definitions
 │   │   ├── components/            # Sidebar (navigation) and Header (date badge, quick export)
 │   │   ├── pages/                 # 9 pages: Home, Dashboard, Inbox, Routing, Deals, Imports, Quality, Exports, Settings
@@ -50,6 +64,7 @@ Revenue_Intelligent_Inbox/
 │   └── package.json               # React 19, TypeScript, Vite, Tailwind CSS, Lucide, Recharts
 ├── revenue_intelligence_findings.pptx # 5 editable PowerPoint slides in dark theme
 ├── demo_script.md                 # 3-minute video recording script with timestamps
+├── DEPLOYMENT.md                  # Complete deployment guide for Vercel, Render & Docker
 ├── DATA_CONTRACT.md               # Complete data contract specification
 ├── .env.example                   # Environment configuration example
 └── README.md
@@ -98,7 +113,7 @@ The application implements and verifies all requirements from `DATA_CONTRACT.md`
 
 ---
 
-## 5. Quick Start & Setup Instructions
+## 5. Quick Start & Local Setup Instructions
 
 ### Prerequisites
 - Python 3.10+
@@ -108,8 +123,9 @@ The application implements and verifies all requirements from `DATA_CONTRACT.md`
 ```bash
 cd backend
 python -m venv venv
-# Windows:
-.\venv\Scripts\activate
+
+# Windows (PowerShell):
+.\venv\Scripts\Activate.ps1
 # Mac/Linux:
 # source venv/bin/activate
 
@@ -124,7 +140,7 @@ cd frontend
 npm install
 npm run dev
 ```
-*Frontend runs at `http://localhost:5173` (or Vite's assigned port).*
+*Frontend runs at `http://localhost:5173`.*
 
 ---
 
@@ -133,7 +149,7 @@ npm run dev
 Run the full business logic test suite:
 ```bash
 cd backend
-pytest tests/test_business_logic.py -v
+python -m pytest tests/test_business_logic.py -v
 ```
 
 ### Verified Test Suite (100% Pass Rate):
@@ -149,9 +165,9 @@ pytest tests/test_business_logic.py -v
 
 ## 7. Deliverables Summary
 
-- **Web Application**: Live dashboard, multi-filter inbox, routing review queue, at-risk deals, import replay suite, data quality audit, export manager, and system settings.
-- **Presentation Slides**: `revenue_intelligence_findings.pptx` (5 editable slides formatted in dark SaaS theme).
-- **Video Walkthrough Script**: `demo_script.md` (3-minute script with precise timestamps and narration).
+- **Live Application**: Deployed on [Vercel](https://revenue-intelligent-inbox-cgu5.vercel.app) and [Render](https://revenue-intelligent-inbox.onrender.com).
+- **Presentation Slides**: [`revenue_intelligence_findings.pptx`](https://github.com/dhavamani16/Revenue_Intelligent_Inbox/blob/main/revenue_intelligence_findings.pptx) (5 editable slides formatted in dark SaaS theme).
+- **Video Walkthrough Script**: [`demo_script.md`](https://github.com/dhavamani16/Revenue_Intelligent_Inbox/blob/main/demo_script.md) (3-minute script with precise timestamps and narration).
 - **Export Package**: Downloadable 11-file ZIP containing:
   - `source_records.csv` and `source_records.json`
   - `conversation_analyses.csv` and `conversation_analyses.json`
